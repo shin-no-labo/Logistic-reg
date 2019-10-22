@@ -4,7 +4,8 @@ import pandas as pd
 from scipy import optimize as opt
 
 # To read data from CSV file.
-# Data format is concerning actual measuring parameter vs failed flag(0:not failed,1:Failed)
+# Data format is normalized concerning actual measuring parameter vs failed flag(0:not failed,1:Failed)
+# Actual measuring data needs normalizing. If it is not normalized, it may cause of error.
 df = pd.read_csv('data.csv')
 input_data = np.array(df)
 Px = input_data[:,0]
@@ -34,7 +35,9 @@ for x in Px:
 
 plt.scatter(Px,Py)
 plt.plot(Px,Px2)
-
+plt.xlabel('Normalized measuring parameter [-]')
+plt.ylabel('Percentage of failed [-]')
+plt.title('sigmoid function')
 plt.show()
 
 output_data = res[0][:]
